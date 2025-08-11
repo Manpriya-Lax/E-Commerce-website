@@ -20,7 +20,10 @@ function App() {
 
 
   return (
-    <div className="App">
+    <>
+    <header> E store </header>
+     <section>
+   <nav>
      {
       results.map(d=> (
         <div key={d.id}>{d.title}</div>
@@ -28,7 +31,15 @@ function App() {
 
 
      }
-    </div>
+     </nav>
+     <article>
+      Main 
+     </article>
+  </section>
+  <footer>
+    footer
+  </footer>
+    </>
   );
 }
 

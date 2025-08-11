@@ -1,4 +1,4 @@
-db{
+{
     "categories": [
 { "id": 1, "title": "Fridges"},
 { "id": 2, "title": "Kettles"},
