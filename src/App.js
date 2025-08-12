@@ -1,28 +1,49 @@
 import React, {useState} from 'react';
 import './App.css';
 import Categories from './omponents/Categories';
-
+import { fetcher } from './fetcher';
 function App() {
 
-  const[results, setResults]= useState([]);
+  const[categories, setCategories]= useState([]);
+  const[products, setProducts]= useState([]);
 
   React.useEffect(() =>{
-    fetch("http://localhost:3001/categories")
-    .then(Response => Response.json())
-    .then(data =>{
-      console.log(data);
-      setResults(data);
-    })
-  
+    const fetchData = async()=> {
+    const data =await fetcher("/categories");
+    setCategories(data);
+        }
+        fetchData();
 
   },[] )
 
+  const handleCatClick = id => {
+
+
+    fetch("http://localhost:3001/products?catId="+ id)
+    .then(Response => Response.json())
+    .then(data =>{
+      console.log(data);
+      setProducts(data);
+    })
+  
+
+
+    
+
+  }
+
 const renderCategories = () =>{
-  return results.map (c =>
-    <Categories key={c.id} id={c.id} title={c.title}/>
+  return categories.map (c =>
+    <Categories key={c.id} id={c.id} title={c.title} onCatClick={()=> handleCatClick(c.id)}/>
 
   );
-} 
+}
+
+const renderProducts = ()=> {
+  return products.map(p => 
+    <div>{p.title}</div>
+  )
+}
 
   return (
     <>
@@ -30,12 +51,13 @@ const renderCategories = () =>{
      <section>
    <nav>
      {
-      (results &&renderCategories())
+      categories && renderCategories()
      }
      </nav>
-     <article>
-      Main 
-     </article>
+     <h1 >products  </h1>
+     <p></p>
+     {products && renderProducts() }
+    
   </section>
   <footer>
     footer
