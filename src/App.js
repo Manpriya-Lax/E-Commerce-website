@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import React, {useState} from 'react';
 import './App.css';
+import Categories from './omponents/Categories';
 
 function App() {
 
@@ -17,7 +17,12 @@ function App() {
 
   },[] )
 
+const renderCategories = () =>{
+  return results.map (c =>
+    <Categories key={c.id} id={c.id} title={c.title}/>
 
+  );
+} 
 
   return (
     <>
@@ -25,11 +30,7 @@ function App() {
      <section>
    <nav>
      {
-      results.map(d=> (
-        <div key={d.id}>{d.title}</div>
-      ))
-
-
+      (results &&renderCategories())
      }
      </nav>
      <article>
